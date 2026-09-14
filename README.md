@@ -9,7 +9,7 @@ reviewable — the same standard I'd want on a production system.
 
 ---
 
-### 🔐 Featured project
+### 🔐 Featured projects
 
 #### [linux-hardening](https://github.com/abdrahmentakrouni/linux-hardening)
 
@@ -26,6 +26,20 @@ One-shot, idempotent hardening for fresh Ubuntu/Debian and RHEL/Rocky servers �
 
 `bash` `linux` `security` `cis-benchmarks` `devsecops` `docker` `github-actions`
 
+#### [secure-nextcloud](https://github.com/abdrahmentakrouni/secure-nextcloud)
+
+A private cloud, hardened — GDPR-aligned Nextcloud for the "our client files
+leaked" nightmare that keeps European companies up at night.
+
+- **TLS everywhere** — local PKI generator (root CA + SAN cert), nginx with TLS 1.2/1.3 only, HSTS, login rate limiting
+- **2FA forced on every account** — TOTP + backup codes, enforced instance-wide, no exceptions
+- **RBAC / IAM** — five role groups, quotas, internal apps hidden from external clients, one-command offboarding
+- **Encrypted backups** — AES-256 + PBKDF2, SHA-256 manifests, retention policy, documented restore drills
+- **GDPR mapping** — every control documented against the regulation article it answers (Art. 32, 25, 5)
+- **CI boots the whole stack** — hardening, 2FA, IAM and audit run end-to-end against a real Nextcloud on every push
+
+`nextcloud` `docker-compose` `tls` `2fa` `iam` `gdpr` `nginx` `cloud-security`
+
 ---
 
 ### 🧰 Toolkit
@@ -33,13 +47,17 @@ One-shot, idempotent hardening for fresh Ubuntu/Debian and RHEL/Rocky servers �
 ![Linux](https://img.shields.io/badge/Linux-05122A?style=flat&logo=linux&logoColor=white)
 ![Bash](https://img.shields.io/badge/GNU_Bash-05122A?style=flat&logo=gnu-bash&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-05122A?style=flat&logo=docker&logoColor=white)
+![Nextcloud](https://img.shields.io/badge/Nextcloud-05122A?style=flat&logo=nextcloud&logoColor=white)
+![nginx](https://img.shields.io/badge/nginx-05122A?style=flat&logo=nginx&logoColor=white)
+![MariaDB](https://img.shields.io/badge/MariaDB-05122A?style=flat&logo=mariadb&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-05122A?style=flat&logo=redis&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-05122A?style=flat&logo=githubactions&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-05122A?style=flat&logo=git&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-05122A?style=flat&logo=ubuntu&logoColor=white)
 ![Debian](https://img.shields.io/badge/Debian-05122A?style=flat&logo=debian&logoColor=white)
 ![Red Hat](https://img.shields.io/badge/RHEL_.Rocky-05122A?style=flat&logo=redhat&logoColor=white)
 
-**Focus areas:** server hardening · firewalls (ufw / firewalld / iptables) · SSH · fail2ban · sysctl · pwquality / faillock · unattended upgrades · CI security gates
+**Focus areas:** server hardening · private cloud · TLS / PKI · identity & access management · data protection (GDPR) · CI security gates · firewalls · fail2ban · sysctl
 
 ---
 
