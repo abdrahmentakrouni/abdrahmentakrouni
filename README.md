@@ -3,8 +3,9 @@
 **Cloud Security · Linux Hardening · DevSecOps**
 
 I build the part of security that actually runs on machines: hardened server
-baselines, encrypted private clouds, backups that survive ransomware, and CI
-pipelines that prove the work instead of claiming it. Every project I ship is tested in CI, documented, and
+baselines, encrypted private clouds, backups that survive ransomware, secure
+networks built as code, and CI pipelines that prove the work instead of
+claiming it. Every project I ship is tested in CI, documented, and
 reviewable — the same standard I'd want on a production system.
 
 ---
@@ -56,6 +57,21 @@ layer for the night a company's servers get encrypted.
 
 `backup` `disaster-recovery` `ransomware` `business-continuity` `encryption` `rclone` `s3` `bash`
 
+
+#### [secure-vpc-baseline](https://github.com/abdrahmentakrouni/secure-vpc-baseline)
+
+A secure AWS network built entirely as code — the foundation layer every
+project above would run on.
+
+- **Three isolated tiers** — public / app / data subnets per AZ; the data tier's route table is empty: no internet in or out, only an S3 gateway endpoint for encrypted backups
+- **Dual firewall** — security groups reference each other by role instead of CIDR blocks, NACLs backstop every subnet, and the VPC default SG + NACL deny everything
+- **No bastion, no SSH** — SSM interface endpoints keep private instances fully manageable with zero open management ports anywhere
+- **Forensic audit vault** — multi-region CloudTrail with log validation plus 1-minute VPC flow logs (parquet) into a KMS-encrypted, object-locked S3 bucket nobody can rewrite
+- **Tamper alarms** — root account usage, unauthorized API calls and StopLogging / DeleteTrail attempts all page an SNS topic within minutes
+- **CI security gate** — Checkov (172 policies, 0 failed) + tfsec + tflint block misconfigurations on every push, every skip carries a written justification
+
+`terraform` `aws` `vpc` `iac` `devsecops` `checkov` `tfsec` `cloudtrail` `kms`
+
 ---
 
 ### 🧰 Toolkit
@@ -69,13 +85,15 @@ layer for the night a company's servers get encrypted.
 ![Redis](https://img.shields.io/badge/Redis-05122A?style=flat&logo=redis&logoColor=white)
 ![MinIO](https://img.shields.io/badge/MinIO-05122A?style=flat&logo=minio&logoColor=white)
 ![rclone](https://img.shields.io/badge/rclone-05122A?style=flat&logo=rclone&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-05122A?style=flat&logo=terraform&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-05122A?style=flat&logo=amazonwebservices&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-05122A?style=flat&logo=githubactions&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-05122A?style=flat&logo=git&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-05122A?style=flat&logo=ubuntu&logoColor=white)
 ![Debian](https://img.shields.io/badge/Debian-05122A?style=flat&logo=debian&logoColor=white)
 ![Red Hat](https://img.shields.io/badge/RHEL_.Rocky-05122A?style=flat&logo=redhat&logoColor=white)
 
-**Focus areas:** server hardening · private cloud · backup & disaster recovery · ransomware resilience · TLS / PKI · identity & access management · data protection (GDPR) · CI security gates · firewalls · fail2ban
+**Focus areas:** server hardening · private cloud · backup & disaster recovery · ransomware resilience · secure network design (IaC) · TLS / PKI · identity & access management · data protection (GDPR) · CI security gates · firewalls · fail2ban
 
 ---
 
@@ -87,9 +105,9 @@ layer for the night a company's servers get encrypted.
 
 ### 🌱 Currently learning
 
-- **Cloud:** AWS core (IAM, VPC, EC2, CloudTrail) with a security lens
-- **IaC:** Terraform — codified, reviewable infrastructure
-- **Next builds:** more hands-on cloud security automation → watch this space
+- **Cloud:** AWS networking and security services, deepening through hands-on builds
+- **IaC:** Terraform production patterns — secure-vpc-baseline is the first full build
+- **Next builds:** GuardDuty integration, EKS / RDS workload modules for the VPC baseline → watch this space
 
 ---
 
