@@ -3,8 +3,8 @@
 **Cloud Security · Linux Hardening · DevSecOps**
 
 I build the part of security that actually runs on machines: hardened server
-baselines, idempotent automation, and CI pipelines that prove the work instead
-of claiming it. Every project I ship is tested in CI, documented, and
+baselines, encrypted private clouds, backups that survive ransomware, and CI
+pipelines that prove the work instead of claiming it. Every project I ship is tested in CI, documented, and
 reviewable — the same standard I'd want on a production system.
 
 ---
@@ -40,6 +40,22 @@ leaked" nightmare that keeps European companies up at night.
 
 `nextcloud` `docker-compose` `tls` `2fa` `iam` `gdpr` `nginx` `cloud-security`
 
+
+#### [backup-vault](https://github.com/abdrahmentakrouni/backup-vault)
+
+Ransomware-resilient automated backup and disaster recovery — the survival
+layer for the night a company's servers get encrypted.
+
+- **Automated nightly backups** — cron / systemd timers, files + consistent MariaDB/MySQL dumps, installed with one command
+- **AES-256 encryption in one stream** — PBKDF2 (300k iterations), plaintext never touches the disk, passphrase never touches argv
+- **3-2-1 off-site replication** — S3 (rclone), append-only SSH vault with a hardened ingest wrapper that refuses deletes, or a plain NAS/USB target
+- **Grandfather-father-son retention** — 7 daily / 4 weekly / 12 monthly, pruned locally and remotely
+- **Ransomware canary tripwire** — decoy business files checksummed before every run; drift aborts the backup with exit 42 before it can overwrite good copies
+- **Provable recovery** — SHA-256 manifests, one-command drill with measured RTO, full health audit (RPO age, encryption, off-site, schedule)
+- **CI disaster simulation** — every push: real backup, ransomware scrambles files and drops the database, restore from the vault, byte-for-byte proof (19 checks green)
+
+`backup` `disaster-recovery` `ransomware` `business-continuity` `encryption` `rclone` `s3` `bash`
+
 ---
 
 ### 🧰 Toolkit
@@ -51,13 +67,15 @@ leaked" nightmare that keeps European companies up at night.
 ![nginx](https://img.shields.io/badge/nginx-05122A?style=flat&logo=nginx&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-05122A?style=flat&logo=mariadb&logoColor=white)
 ![Redis](https://img.shields.io/badge/Redis-05122A?style=flat&logo=redis&logoColor=white)
+![MinIO](https://img.shields.io/badge/MinIO-05122A?style=flat&logo=minio&logoColor=white)
+![rclone](https://img.shields.io/badge/rclone-05122A?style=flat&logo=rclone&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-05122A?style=flat&logo=githubactions&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-05122A?style=flat&logo=git&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-05122A?style=flat&logo=ubuntu&logoColor=white)
 ![Debian](https://img.shields.io/badge/Debian-05122A?style=flat&logo=debian&logoColor=white)
 ![Red Hat](https://img.shields.io/badge/RHEL_.Rocky-05122A?style=flat&logo=redhat&logoColor=white)
 
-**Focus areas:** server hardening · private cloud · TLS / PKI · identity & access management · data protection (GDPR) · CI security gates · firewalls · fail2ban · sysctl
+**Focus areas:** server hardening · private cloud · backup & disaster recovery · ransomware resilience · TLS / PKI · identity & access management · data protection (GDPR) · CI security gates · firewalls · fail2ban
 
 ---
 
