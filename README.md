@@ -4,7 +4,8 @@
 
 I build the part of security that actually runs on machines: hardened server
 baselines, encrypted private clouds, backups that survive ransomware, secure
-networks built as code, and CI pipelines that prove the work instead of
+networks built as code, incident response that reacts in
+seconds, and CI pipelines that prove the work instead of
 claiming it. Every project I ship is tested in CI, documented, and
 reviewable — the same standard I'd want on a production system.
 
