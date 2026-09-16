@@ -72,6 +72,19 @@ project above would run on.
 
 `terraform` `aws` `vpc` `iac` `devsecops` `checkov` `tfsec` `cloudtrail` `kms`
 
+#### [cloud-incident-response](https://github.com/abdrahmentakrouni/cloud-incident-response)
+
+Event-driven incident response for AWS — the account doesn't just log
+attacks, it reacts to them.
+
+- **Event-driven detection** — EventBridge rules on root activity, security group changes, GuardDuty findings and new IAM keys; a triage Lambda normalizes and scores every event in about a second
+- **Auto-remediation** — public SSH/RDP revoked within seconds, GuardDuty credential findings quarantine every access key of the compromised user; triage and responders run under separate least-privilege roles, so even a bug can't read secrets AND touch infrastructure
+- **Alerts you can act on** — full report (who, what, when, evidence, action taken) to Slack / Discord / email, webhook stored in Secrets Manager instead of plaintext config
+- **Forensic memory** — every incident lands in a KMS-encrypted DynamoDB log with a 90-day TTL, timeline appended by whoever acts last
+- **Offline simulator** — five recorded real-world-shaped attacks replay through the production code paths with zero AWS calls; CI proves the decision tree on every push (37 tests + Checkov + tfsec + tflint, all blocking)
+
+`incident-response` `guardduty` `eventbridge` `lambda` `auto-remediation` `aws` `python` `terraform`
+
 ---
 
 ### 🧰 Toolkit
@@ -93,7 +106,7 @@ project above would run on.
 ![Debian](https://img.shields.io/badge/Debian-05122A?style=flat&logo=debian&logoColor=white)
 ![Red Hat](https://img.shields.io/badge/RHEL_.Rocky-05122A?style=flat&logo=redhat&logoColor=white)
 
-**Focus areas:** server hardening · private cloud · backup & disaster recovery · ransomware resilience · secure network design (IaC) · TLS / PKI · identity & access management · data protection (GDPR) · CI security gates · firewalls · fail2ban
+**Focus areas:** server hardening · private cloud · backup & disaster recovery · ransomware resilience · incident response & threat detection · secure network design (IaC) · TLS / PKI · identity & access management · data protection (GDPR) · CI security gates · firewalls · fail2ban
 
 ---
 
@@ -107,7 +120,8 @@ project above would run on.
 
 - **Cloud:** AWS networking and security services, deepening through hands-on builds
 - **IaC:** Terraform production patterns — secure-vpc-baseline is the first full build
-- **Next builds:** GuardDuty integration, EKS / RDS workload modules for the VPC baseline → watch this space
+- **Detection engineering:** GuardDuty + EventBridge response patterns — cloud-incident-response is the first full build
+- **Next builds:** EKS / RDS workload modules for the VPC baseline → watch this space
 
 ---
 
