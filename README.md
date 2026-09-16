@@ -86,6 +86,18 @@ attacks, it reacts to them.
 
 `incident-response` `guardduty` `eventbridge` `lambda` `auto-remediation` `aws` `python` `terraform`
 
+#### [secure-ci-pipeline](https://github.com/abdrahmentakrouni/secure-ci-pipeline)
+
+A security gate for container builds — scan, sign, ship. Or stop.
+
+- **Provable gate** — CI builds a clean release image (must PASS) and a deliberately rotten one (must BLOCK); both verdicts are asserted on every run, so the gate demonstrates itself instead of claiming to work
+- **Dual scanner, no monopoly** — trivy + grype scan every image from different vulnerability databases; both tool binaries are pinned and SHA-256 verified before they are allowed to run
+- **Policy as code** — one reviewable YAML decides: CRITICAL blocks, HIGH risk appetite expressed as counts, allowlist entries carry a written reason and an expiry date — expired entries start blocking again automatically
+- **Keyless signing** — cosign signs the passing image with the workflow's OIDC identity (there are no long-lived keys to leak) and attaches an SPDX SBOM attestation; one command verifies an image before any deploy
+- **Nightly drift detection** — the shipped image is re-scanned every night against the same policy and its signature re-verified; a new CVE opens an alert issue on its own
+
+`devsecops` `container-security` `trivy` `grype` `gitleaks` `cosign` `sbom` `github-actions`
+
 ---
 
 ### 🧰 Toolkit
@@ -102,12 +114,16 @@ attacks, it reacts to them.
 ![Terraform](https://img.shields.io/badge/Terraform-05122A?style=flat&logo=terraform&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-05122A?style=flat&logo=amazonwebservices&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-05122A?style=flat&logo=githubactions&logoColor=white)
+![Trivy](https://img.shields.io/badge/Trivy-05122A?style=flat)
+![Grype](https://img.shields.io/badge/Grype-05122A?style=flat)
+![Gitleaks](https://img.shields.io/badge/Gitleaks-05122A?style=flat)
+![Cosign](https://img.shields.io/badge/Cosign-05122A?style=flat)
 ![Git](https://img.shields.io/badge/Git-05122A?style=flat&logo=git&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu-05122A?style=flat&logo=ubuntu&logoColor=white)
 ![Debian](https://img.shields.io/badge/Debian-05122A?style=flat&logo=debian&logoColor=white)
 ![Red Hat](https://img.shields.io/badge/RHEL_.Rocky-05122A?style=flat&logo=redhat&logoColor=white)
 
-**Focus areas:** server hardening · private cloud · backup & disaster recovery · ransomware resilience · incident response & threat detection · secure network design (IaC) · TLS / PKI · identity & access management · data protection (GDPR) · CI security gates · firewalls · fail2ban
+**Focus areas:** server hardening · private cloud · backup & disaster recovery · ransomware resilience · incident response & threat detection · secure network design (IaC) · container & supply-chain security · TLS / PKI · identity & access management · data protection (GDPR) · CI security gates · firewalls · fail2ban
 
 ---
 
@@ -122,6 +138,7 @@ attacks, it reacts to them.
 - **Cloud:** AWS networking and security services, deepening through hands-on builds
 - **IaC:** Terraform production patterns — secure-vpc-baseline is the first full build
 - **Detection engineering:** GuardDuty + EventBridge response patterns — cloud-incident-response is the first full build
+- **Supply chain:** SLSA / sigstore signing and SBOM attestation — secure-ci-pipeline is the first full build
 - **Next builds:** EKS / RDS workload modules for the VPC baseline → watch this space
 
 ---
