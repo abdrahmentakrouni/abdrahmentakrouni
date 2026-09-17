@@ -4,9 +4,9 @@
 
 I build the part of security that actually runs on machines: hardened server
 baselines, encrypted private clouds, backups that survive ransomware, secure
-networks built as code, incident response that reacts in
-seconds, and CI pipelines that prove the work instead of
-claiming it. Every project I ship is tested in CI, documented, and
+networks built as code, perimeters that fight back on their own, incident
+response that reacts in seconds, and CI pipelines that prove the work instead
+of claiming it. Every project I ship is tested in CI, documented, and
 reviewable — the same standard I'd want on a production system.
 
 ---
@@ -98,6 +98,19 @@ A security gate for container builds — scan, sign, ship. Or stop.
 
 `devsecops` `container-security` `trivy` `grype` `gitleaks` `cosign` `sbom` `github-actions`
 
+#### [secure-perimeter](https://github.com/abdrahmentakrouni/secure-perimeter)
+
+An automated perimeter that fights back — pfSense firewall, inline
+IDS/IPS, and telework VPN that prove themselves in CI.
+
+- **Inline IPS, not just alerts** — Suricata runs in block mode on the WAN: known-bad packets die on the wire; custom signatures cover ssh brute bursts, SMB arriving from the internet, icmp sweeps and c2 channels
+- **soc-lite auto-blocker** — tails the sensor's EVE log, scores sources in a sliding 120 s window and cuts repeat offenders off for 15 minutes by editing a firewall alias through the pfSense REST API; private ranges are allowlisted, so it can never lock the company out of itself
+- **Telework in one command** — provision-peer.sh generates the keypair, per-peer pre-shared key, client profile and QR code and registers the peer via API; revocation is the same one-liner; VPN clients reach the DMZ apps and nothing else
+- **Policy as code** — 7 audit checks (PW001-PW007) verify the pfSense baseline on every push: default deny on WAN, no any/any rules, VPN-to-LAN isolation, IPS inline, WireGuard enabled
+- **Provable detection** — CI replays a captured attack session and asserts both attackers get blocked; a live demo job, not a claim in a README
+
+`pfsense` `suricata` `ids` `ips` `wireguard` `vpn` `network-security` `soc-automation`
+
 ---
 
 ### 🧰 Toolkit
@@ -116,6 +129,9 @@ A security gate for container builds — scan, sign, ship. Or stop.
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-05122A?style=flat&logo=githubactions&logoColor=white)
 ![Trivy](https://img.shields.io/badge/Trivy-05122A?style=flat)
 ![Grype](https://img.shields.io/badge/Grype-05122A?style=flat)
+![pfSense](https://img.shields.io/badge/pfSense-05122A?style=flat&logo=pfsense&logoColor=white)
+![Suricata](https://img.shields.io/badge/Suricata-05122A?style=flat)
+![WireGuard](https://img.shields.io/badge/WireGuard-05122A?style=flat&logo=wireguard&logoColor=white)
 ![Gitleaks](https://img.shields.io/badge/Gitleaks-05122A?style=flat)
 ![Cosign](https://img.shields.io/badge/Cosign-05122A?style=flat)
 ![Git](https://img.shields.io/badge/Git-05122A?style=flat&logo=git&logoColor=white)
